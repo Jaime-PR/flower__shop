@@ -55,9 +55,7 @@ interface ApiService {
     ): List<dataProductoItem>
 
     @GET("detalle_producto.php")
-    suspend fun obtenerDetalleProducto(
-        @Query("id_producto") idProducto: Int
-    ): Response<dataDetalleProductoResponse>
+    suspend fun obtenerDetalleProducto(@Query("id_producto") idProducto: Int): Response<dataDetalleProductoResponse>
 
     //Carrito
     @POST("agregar_al_carrito.php")
