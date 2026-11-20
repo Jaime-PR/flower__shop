@@ -1,4 +1,4 @@
-package com.example.flower__shop.modelo
+package com.example.flower__shop.red
 
 import com.example.flower__shop.interfaceApi.ApiService
 import kotlinx.serialization.json.Json
@@ -9,7 +9,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 object RetroFitCliente {
     const val BASE_URL = "https://jaimeapr.somos4a.org/flowershop_api/"
 
-    private val jsonConfig = Json{
+    private val jsonConfig = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true
         isLenient = true
