@@ -5,9 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class dataRegistroRequest(
-    @SerialName("nombre_completo") val nombreCompleto: String = "",
+    @SerialName("nombre") val nombre: String = "",
+    @SerialName("apellido_paterno") val apellidoPaterno: String = "",
+    @SerialName("apellido_materno") val apellidoMaterno: String = "",
     @SerialName("correo") val correo: String = "",
     @SerialName("telefono") val telefono: String = "",
-    @SerialName("password") val password: String = "",
-    @SerialName("confirmar_password") val confirmarPassword: String = ""
+    @SerialName("password") val password: String = ""
 )
