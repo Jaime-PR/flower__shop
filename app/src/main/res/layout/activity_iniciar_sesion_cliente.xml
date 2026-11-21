@@ -93,18 +93,6 @@
                     app:strokeColor="#F5C6DC"
                     app:strokeWidth="1dp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnTabLogin"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#E30B7B"
-                    android:text="Ya tengo cuenta"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    app:cornerRadius="24dp" />
             </LinearLayout>
 
             <!-- Correo -->
