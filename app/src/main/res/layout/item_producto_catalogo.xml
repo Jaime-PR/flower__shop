@@ -74,7 +74,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="Agregar al carrito"
                     android:scaleType="fitCenter"
-                    tools:src="@android:drawable/ic_input_add" />
+                    android:src="@drawable/carrito_seleccionar"/>
             </FrameLayout>
 
         </RelativeLayout>
