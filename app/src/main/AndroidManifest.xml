@@ -23,7 +23,15 @@
         </activity>
         <activity
             android:name=".vista.pantalla_carrito"
-            android:exported="false"/>
+            android:exported="false" />
+        <activity
+            android:name=".vista.crerar_cuenta_cliente"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".vista.iniciar_sesion_cliente"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
