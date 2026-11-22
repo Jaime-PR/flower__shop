@@ -1,5 +1,6 @@
 package com.example.flower__shop.vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -83,11 +84,7 @@ class pantalla_explorar : AppCompatActivity() {
                 Toast.makeText(this, "Producto: ${producto.nombre}", Toast.LENGTH_SHORT).show()
             },
             onAgregarCarritoClick = { producto ->
-                if (!producto.disponible) {
-                    Toast.makeText(this, "Producto sin disponibilidad", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Agregar al carrito: ${producto.nombre}", Toast.LENGTH_SHORT).show()
-                }
+                presentador.agregarProductoAlCarrito(producto, 1)
             }
         )
         rvProductos.layoutManager = GridLayoutManager(this, 2)
@@ -114,7 +111,8 @@ class pantalla_explorar : AppCompatActivity() {
         }
 
         navCarrito.setOnClickListener {
-            // Navegar a pantalla_carrito cuando se conecte esa Activity
+            val intent = Intent(this, pantalla_carrito::class.java)
+            startActivity(intent)
         }
 
         navPerfil.setOnClickListener {
@@ -159,6 +157,10 @@ class pantalla_explorar : AppCompatActivity() {
     }
 
     fun mostrarError(mensaje: String) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+    }
+
+    fun mostrarMensaje(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 }
