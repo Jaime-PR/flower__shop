@@ -103,7 +103,8 @@ class pantalla_carrito : AppCompatActivity() {
         navInicio.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP
             )
             startActivity(intent)
         }
@@ -114,11 +115,11 @@ class pantalla_carrito : AppCompatActivity() {
         }
 
         navCarrito.setOnClickListener {
-            // Ya estás en pantalla_carrito
         }
 
         navPerfil.setOnClickListener {
             startActivity(Intent(this, pantalla_perfil::class.java))
+            finish()
         }
     }
 
