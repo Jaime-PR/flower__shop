@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <!-- Encabezado -->
+
     <TextView
         android:id="@+id/tvTituloApp"
         android:layout_width="match_parent"
