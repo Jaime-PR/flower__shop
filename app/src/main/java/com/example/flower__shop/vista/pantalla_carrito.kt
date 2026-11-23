@@ -109,12 +109,9 @@ class pantalla_carrito : AppCompatActivity() {
             finish()
         }
 
-        navCarrito.setOnClickListener {
-            // Ya estás en pantalla_carrito
-        }
-
         navPerfil.setOnClickListener {
-            // Navegar a Perfil cuando se conecte esa Activity
+            startActivity(Intent(this, pantalla_perfil::class.java))
+            finish()
         }
     }
 
