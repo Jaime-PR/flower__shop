@@ -81,7 +81,14 @@ class pantalla_explorar : AppCompatActivity() {
             activity = this,
             listaProductos = emptyList(),
             onProductoClick = { producto ->
-                Toast.makeText(this, "Producto: ${producto.nombre}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, pantalla_detalle_producto::class.java).apply {
+                    putExtra("id_producto", producto.idProducto)
+                    putExtra("nombre", producto.nombre)
+                    putExtra("precio", producto.precio)
+                    putExtra("imagen_url", producto.imagenUrl)
+                    putExtra("disponible", producto.disponible)
+                }
+                startActivity(intent)
             },
             onAgregarCarritoClick = { producto ->
                 presentador.agregarProductoAlCarrito(producto, 1)
@@ -116,7 +123,7 @@ class pantalla_explorar : AppCompatActivity() {
         }
 
         navPerfil.setOnClickListener {
-            // Navegar a Perfil cuando se conecte esa Activity
+            startActivity(Intent(this, pantalla_perfil::class.java))
         }
     }
 
