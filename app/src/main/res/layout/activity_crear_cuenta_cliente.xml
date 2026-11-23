@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:orientation="vertical"
-    tools:context=".CrearCuentaActivity">
+    android:orientation="vertical">
 
     <!-- Encabezado -->
+
     <TextView
         android:id="@+id/tvTituloApp"
         android:layout_width="match_parent"
@@ -37,19 +37,20 @@
             android:padding="16dp">
 
             <!-- Volver -->
-            <TextView
-                android:id="@+id/tvVolver"
+            <Button
+                android:id="@+id/btnVolver"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
                 android:padding="4dp"
                 android:text="← Volver"
+                android:textAllCaps="false"
                 android:textColor="#444444"
                 android:textSize="13sp" />
 
-            <!-- Pasos -->
-
             <!-- Título -->
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +78,20 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnTabLogin"
+                    android:id="@+id/btnTabCrearCuenta"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#E30B7B"
+                    android:text="Crear cuenta"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    app:cornerRadius="24dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIniciarsesion"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="6dp"
@@ -120,8 +134,8 @@
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"
                     android:hint="Ej. Sofía"
+                    android:inputType="textPersonName|textCapWords"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -154,8 +168,8 @@
                     android:id="@+id/etApellidoPaterno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"
                     android:hint="Ej. Ramos"
+                    android:inputType="textPersonName|textCapWords"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -188,8 +202,8 @@
                     android:id="@+id/etApellidoMaterno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"
                     android:hint="Ej. Valdez"
+                    android:inputType="textPersonName|textCapWords"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -222,8 +236,8 @@
                     android:id="@+id/etCorreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:hint="correo@ejemplo.com"
+                    android:inputType="textEmailAddress"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -256,9 +270,9 @@
                     android:id="@+id/etTelefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="7710000000"
                     android:inputType="phone"
                     android:maxLength="10"
-                    android:hint="7710000000"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -325,8 +339,8 @@
                     android:id="@+id/etConfirmarContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
                     android:hint="Repite tu contraseña"
+                    android:inputType="textPassword"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -337,6 +351,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
                 android:backgroundTint="#E30B7B"
                 android:text="CREAR CUENTA Y CONTINUAR"
                 android:textColor="#FFFFFF"
@@ -346,5 +361,135 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <!-- Línea divisoria sutil -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F5C6DC" />
+
+    <!-- Barra de navegación inferior fija -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="6dp">
+
+        <!-- Item 1: Inicio -->
+        <LinearLayout
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivNavInicio"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Inicio"
+                android:scaleType="fitCenter"
+                android:src="@drawable/inicio" />
+
+            <TextView
+                android:id="@+id/tvNavInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Inicio"
+                android:textColor="#8E7C83"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Item 2: Explorar -->
+        <LinearLayout
+            android:id="@+id/navExplorar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivNavExplorar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Explorar"
+                android:scaleType="fitCenter"
+                android:src="@drawable/explorar" />
+
+            <TextView
+                android:id="@+id/tvNavExplorar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Explorar"
+                android:textColor="#8E7C83"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Item 3: Carrito -->
+        <LinearLayout
+            android:id="@+id/navCarrito"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivNavCarrito"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Carrito"
+                android:scaleType="fitCenter"
+                android:src="@drawable/carrito" />
+
+            <TextView
+                android:id="@+id/tvNavCarrito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Carrito"
+                android:textColor="#8E7C83"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Item 4: Perfil (Activo) -->
+        <LinearLayout
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_nav_active"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivNavPerfil"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Perfil"
+                android:scaleType="fitCenter"
+                android:src="@drawable/perfil_on" />
+
+            <TextView
+                android:id="@+id/tvNavPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Perfil"
+                android:textColor="#E30B7B"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

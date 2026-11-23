@@ -45,12 +45,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Contenido desplazable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
         <LinearLayout
@@ -61,7 +60,6 @@
             android:paddingTop="14dp"
             android:paddingBottom="20dp">
 
-            <!-- Enlace Volver al catálogo -->
             <TextView
                 android:id="@+id/btnVolverCatalogo"
                 android:layout_width="wrap_content"
@@ -71,7 +69,6 @@
                 android:textColor="#555555"
                 android:textSize="13sp" />
 
-            <!-- Imagen del producto más compacta y proporcionada -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
@@ -87,7 +84,6 @@
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Nombre del Producto -->
             <TextView
                 android:id="@+id/txtNombreProducto"
                 android:layout_width="match_parent"
@@ -98,7 +94,6 @@
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
-            <!-- Fila de Precio y Disponibilidad -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,7 +120,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Descripción -->
             <TextView
                 android:id="@+id/txtDescripcion"
                 android:layout_width="match_parent"
@@ -136,7 +130,6 @@
                 android:textColor="#333333"
                 android:textSize="13.5sp" />
 
-            <!-- Tarjeta: Detalles del Arreglo -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,7 +140,6 @@
                 app:strokeColor="#F5D6E6"
                 app:strokeWidth="1dp"/>
 
-            <!-- Botón Principal -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAgregarCarrito"
                 android:layout_width="match_parent"
