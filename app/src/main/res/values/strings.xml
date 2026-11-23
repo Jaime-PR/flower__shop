@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">flower__shop</string>
+    <string name="flower_shop">FLOWER SHOP</string>
+    <string name="volver">← Volver</string>
 </resources>
