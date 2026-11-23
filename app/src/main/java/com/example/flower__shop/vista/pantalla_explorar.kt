@@ -114,7 +114,11 @@ class pantalla_explorar : AppCompatActivity() {
         }
 
         navInicio.setOnClickListener {
-            // Navegar a Inicio cuando se conecte esa Activity
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            )
+            startActivity(intent)
         }
 
         navCarrito.setOnClickListener {
