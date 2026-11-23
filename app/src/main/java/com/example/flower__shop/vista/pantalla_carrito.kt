@@ -101,7 +101,11 @@ class pantalla_carrito : AppCompatActivity() {
     private fun configurarEventos() {
 
         navInicio.setOnClickListener {
-            // Navegar a Inicio cuando se conecte esa Activity
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            )
+            startActivity(intent)
         }
 
         navExplorar.setOnClickListener {
@@ -114,7 +118,7 @@ class pantalla_carrito : AppCompatActivity() {
         }
 
         navPerfil.setOnClickListener {
-            // Navegar a Perfil cuando se conecte esa Activity
+            startActivity(Intent(this, pantalla_perfil::class.java))
         }
     }
 
