@@ -33,7 +33,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".vista.crerar_cuenta_cliente"
+            android:name=".vista.crear_cuenta_cliente"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
