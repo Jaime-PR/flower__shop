@@ -136,5 +136,8 @@ class clsExplorarPresentador(private val vista: pantalla_explorar, private val i
             }
         }
     }
+    fun verDetalleProducto(producto: dataProductoItem) {
+        vista.abrirDetalleProducto(producto.idProducto, idCliente)
+    }
 
 }
