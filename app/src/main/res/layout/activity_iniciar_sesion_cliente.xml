@@ -190,7 +190,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#F5C6DC" />
+        android:background="#F5C6DC"
+        android:visibility="visible" />
 
     <!-- Barra de navegación inferior fija -->
     <LinearLayout
@@ -201,7 +202,8 @@
         android:elevation="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingVertical="6dp">
+        android:paddingVertical="6dp"
+        android:visibility="gone">
 
         <!-- Item 1: Inicio -->
         <LinearLayout
