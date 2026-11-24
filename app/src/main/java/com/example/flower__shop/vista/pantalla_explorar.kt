@@ -81,7 +81,7 @@ class pantalla_explorar : AppCompatActivity() {
             activity = this,
             listaProductos = emptyList(),
             onProductoClick = { producto ->
-                Toast.makeText(this, "Producto: ${producto.nombre}", Toast.LENGTH_SHORT).show()
+                presentador.verDetalleProducto(producto)
             },
             onAgregarCarritoClick = { producto ->
                 presentador.agregarProductoAlCarrito(producto, 1)
@@ -166,5 +166,11 @@ class pantalla_explorar : AppCompatActivity() {
 
     fun mostrarMensaje(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+    }
+    fun abrirDetalleProducto(idProducto: Int, idCliente: Int) {
+        val intent = Intent(this, pantalla_detalle_producto::class.java)
+        intent.putExtra("id_producto", idProducto)
+        intent.putExtra("id_cliente", idCliente)
+        startActivity(intent)
     }
 }
