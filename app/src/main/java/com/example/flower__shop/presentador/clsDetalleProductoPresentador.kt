@@ -3,13 +3,13 @@ package com.example.flower__shop.presentador
 import com.example.flower__shop.modelo.clsCarritoModelo
 import com.example.flower__shop.modelo.clsDetalleModelo
 import com.example.flower__shop.modelo.dataDetalleProductoResponse
-import com.example.flower__shop.vista.pantalla_detalle_producto // Cambia al nombre exacto de tu Activity/Fragment de detalle
+import com.example.flower__shop.vista.pantalla_detalle_producto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class clsDetalleProductoPresentador(
-    private val vista: pantalla_detalle_producto, // Cambia al nombre exacto de tu vista
+    private val vista: pantalla_detalle_producto,
     private val idProducto: Int,
     private val idCliente: Int = 0
 ) {

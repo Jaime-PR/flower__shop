@@ -67,8 +67,8 @@
 
                     <ImageView
                         android:id="@+id/ivAvatarPerfil"
-                        android:layout_width="48dp"
-                        android:layout_height="46dp"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
                         android:layout_gravity="center"
                         android:contentDescription="Icono de Perfil"
                         android:scaleType="fitCenter"
@@ -104,20 +104,29 @@
                     <LinearLayout
                         android:id="@+id/btnNombreUsuario"
                         android:layout_width="match_parent"
-                        android:layout_height="52dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="58dp"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp">
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre completo"
+                            android:textColor="#8E7C83"
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/txtNombreUsuario"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Nombre de usuario"
+                            android:layout_marginTop="2dp"
                             android:textColor="#333333"
-                            android:textSize="13.5sp" />
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -127,22 +136,63 @@
                         android:background="#F0F0F0" />
 
                     <LinearLayout
-                        android:id="@+id/btnDirecciones"
+                        android:id="@+id/btnCorreo"
                         android:layout_width="match_parent"
-                        android:layout_height="52dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="58dp"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp">
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Correo electrónico"
+                            android:textColor="#8E7C83"
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/txtCorreo"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Correo"
+                            android:layout_marginTop="2dp"
                             android:textColor="#333333"
-                            android:textSize="13.5sp" />
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F0F0F0" />
+
+                    <LinearLayout
+                        android:id="@+id/btnTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="58dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Teléfono"
+                            android:textColor="#8E7C83"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/txtTelefono"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 

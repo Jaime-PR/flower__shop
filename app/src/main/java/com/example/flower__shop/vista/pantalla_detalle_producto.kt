@@ -87,7 +87,6 @@ class pantalla_detalle_producto : AppCompatActivity() {
         }
     }
 
-    // AQUÍ ESTÁ EL MÉTODO CON LA LÓGICA DE RETROFIT BASE_URL Y GLIDE:
     fun mostrarDetalleProducto(producto: dataDetalleProductoResponse) {
         txtNombreProducto.text = producto.nombre
         txtPrecio.text = "$${String.format("%.2f", producto.precio)}"
