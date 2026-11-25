@@ -3,6 +3,7 @@ package com.example.flower__shop.vista
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -25,11 +26,22 @@ class iniciar_sesion_cliente : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 1. Si ya hay sesión iniciada, te lleva directo a MainActivity (activity_main.xml)
+        val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
+        val sesionActiva = prefs.getBoolean("sesion_activa", false)
+        if (sesionActiva) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_iniciar_sesion_cliente)
 
         presentador = clsLoginPresentador(this)
 
         enlazarVistas()
+        configurarVisibilidadNavegacion()
         configurarEventos()
     }
 
@@ -41,6 +53,14 @@ class iniciar_sesion_cliente : AppCompatActivity() {
         btnVolver = findViewById(R.id.btnVolver)
     }
 
+    private fun configurarVisibilidadNavegacion() {
+        val volverAtras = intent.getBooleanExtra("volver_atras", false)
+        findViewById<View>(R.id.bottomNav)?.visibility = View.GONE
+        if (!volverAtras) {
+            btnVolver.visibility = View.GONE
+        }
+    }
+
     private fun configurarEventos() {
         btnIniciarSesion.setOnClickListener {
             val correo = etCorreo.text.toString().trim()
@@ -49,7 +69,9 @@ class iniciar_sesion_cliente : AppCompatActivity() {
         }
 
         btnCrearcuenta.setOnClickListener {
-            startActivity(Intent(this, crear_cuenta_cliente::class.java))
+            val intentRegistro = Intent(this, crear_cuenta_cliente::class.java)
+            intentRegistro.putExtra("volver_atras", intent.getBooleanExtra("volver_atras", false))
+            startActivity(intentRegistro)
             finish()
         }
 
@@ -57,17 +79,17 @@ class iniciar_sesion_cliente : AppCompatActivity() {
             finish()
         }
 
-        findViewById<LinearLayout>(R.id.navInicio).setOnClickListener {
+        findViewById<LinearLayout>(R.id.navInicio)?.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-        findViewById<LinearLayout>(R.id.navExplorar).setOnClickListener {
+        findViewById<LinearLayout>(R.id.navExplorar)?.setOnClickListener {
             startActivity(Intent(this, pantalla_explorar::class.java))
             finish()
         }
 
-        findViewById<LinearLayout>(R.id.navCarrito).setOnClickListener {
+        findViewById<LinearLayout>(R.id.navCarrito)?.setOnClickListener {
             startActivity(Intent(this, pantalla_carrito::class.java))
             finish()
         }
@@ -97,12 +119,20 @@ class iniciar_sesion_cliente : AppCompatActivity() {
             apply()
         }
 
-        startActivity(Intent(this, pantalla_explorar::class.java))
-        finish()
+        // 2. Al iniciar sesión por primera vez, también te lleva directo a MainActivity (activity_main.xml)
+        val volverAtras = intent.getBooleanExtra("volver_atras", false)
+        if (volverAtras) {
+            finish()
+        } else {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presentador.onDestroy()
+        if (::presentador.isInitialized) {
+            presentador.onDestroy()
+        }
     }
 }
