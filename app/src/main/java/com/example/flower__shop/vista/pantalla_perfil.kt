@@ -1,5 +1,6 @@
 package com.example.flower__shop.vista
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -38,21 +39,28 @@ class pantalla_perfil : AppCompatActivity() {
         navCarrito = findViewById(R.id.navCarrito)
         navPerfil = findViewById(R.id.navPerfil)
 
-        val prefs = getSharedPreferences("sesion_cliente", MODE_PRIVATE)
-        val idCliente = intent.getIntExtra("id_cliente", prefs.getInt("id_cliente", 1))
+        val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
+        val sesionActiva = prefs.getBoolean("sesion_activa", false)
+        val idCliente = intent.getIntExtra("id_cliente", prefs.getInt("id_cliente", 0))
 
         presentador = clsPerfilPresentador(this, idCliente)
-        presentador.iniciar()
+
+        if (sesionActiva && idCliente > 0) {
+            presentador.iniciar()
+        } else {
+            mostrarModoInvitado()
+        }
 
         configurarEventos()
     }
 
     private fun configurarEventos() {
         btnCerrarSesion.setOnClickListener {
-            val prefs = getSharedPreferences("sesion_cliente", MODE_PRIVATE)
-            prefs.edit().clear().apply()
+            getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE).edit().clear().apply()
+            getSharedPreferences("sesion_cliente", Context.MODE_PRIVATE).edit().clear().apply()
+
+            mostrarModoInvitado()
             Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
-            finish()
         }
 
         navInicio.setOnClickListener {
@@ -70,10 +78,18 @@ class pantalla_perfil : AppCompatActivity() {
         }
     }
 
+    private fun mostrarModoInvitado() {
+        txtNombreUsuario.text = "Invitado"
+        txtCorreo.text = ""
+        txtTelefono.text = ""
+        btnCerrarSesion.isEnabled = false
+    }
+
     fun mostrarPerfil(nombreCompleto: String, correo: String, telefono: String) {
         txtNombreUsuario.text = nombreCompleto
         txtCorreo.text = correo
         txtTelefono.text = telefono
+        btnCerrarSesion.isEnabled = true
     }
 
     fun mostrarError(mensaje: String) {
