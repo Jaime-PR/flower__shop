@@ -73,7 +73,9 @@ class crear_cuenta_cliente : AppCompatActivity() {
         }
 
         btnIniciarsesion.setOnClickListener {
-            startActivity(Intent(this, iniciar_sesion_cliente::class.java))
+            val intentLogin = Intent(this, iniciar_sesion_cliente::class.java)
+            intentLogin.putExtra("volver_atras", intent.getBooleanExtra("volver_atras", false))
+            startActivity(intentLogin)
             finish()
         }
 
@@ -81,17 +83,17 @@ class crear_cuenta_cliente : AppCompatActivity() {
             finish()
         }
 
-        findViewById<LinearLayout>(R.id.navInicio).setOnClickListener {
+        findViewById<LinearLayout>(R.id.navInicio)?.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-        findViewById<LinearLayout>(R.id.navExplorar).setOnClickListener {
+        findViewById<LinearLayout>(R.id.navExplorar)?.setOnClickListener {
             startActivity(Intent(this, pantalla_explorar::class.java))
             finish()
         }
 
-        findViewById<LinearLayout>(R.id.navCarrito).setOnClickListener {
+        findViewById<LinearLayout>(R.id.navCarrito)?.setOnClickListener {
             startActivity(Intent(this, pantalla_carrito::class.java))
             finish()
         }
@@ -110,6 +112,12 @@ class crear_cuenta_cliente : AppCompatActivity() {
         val mensajeBienvenida = datos.mensaje.ifEmpty { "¡Cuenta creada! Bienvenido, ${datos.nombre ?: "cliente"}!" }
         Toast.makeText(this, mensajeBienvenida, Toast.LENGTH_SHORT).show()
 
+        // Apagar modo invitado al crear cuenta
+        getSharedPreferences("ConfigApp", Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean("modo_invitado", false)
+            .apply()
+
         val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
         prefs.edit().apply {
             putBoolean("sesion_activa", true)
@@ -121,12 +129,19 @@ class crear_cuenta_cliente : AppCompatActivity() {
             apply()
         }
 
-        startActivity(Intent(this, pantalla_explorar::class.java))
-        finish()
+        val volverAtras = intent.getBooleanExtra("volver_atras", false)
+        if (volverAtras) {
+            finish()
+        } else {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presentador.onDestroy()
+        if (::presentador.isInitialized) {
+            presentador.onDestroy()
+        }
     }
 }

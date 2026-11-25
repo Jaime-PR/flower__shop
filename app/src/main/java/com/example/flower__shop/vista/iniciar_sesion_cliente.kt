@@ -27,10 +27,15 @@ class iniciar_sesion_cliente : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 1. Si ya hay sesión iniciada, te lleva directo a MainActivity (activity_main.xml)
+        // 1. Si ya hay sesión iniciada O si cerró sesión antes (modo invitado), va directo a MainActivity
         val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
+        val prefsApp = getSharedPreferences("ConfigApp", Context.MODE_PRIVATE)
+
         val sesionActiva = prefs.getBoolean("sesion_activa", false)
-        if (sesionActiva) {
+        val esInvitado = prefsApp.getBoolean("modo_invitado", false)
+        val volverAtras = intent.getBooleanExtra("volver_atras", false)
+
+        if ((sesionActiva || esInvitado) && !volverAtras) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
             return
@@ -108,6 +113,12 @@ class iniciar_sesion_cliente : AppCompatActivity() {
         val mensajeBienvenida = datos.mensaje.ifEmpty { "¡Bienvenido, ${datos.nombre ?: "cliente"}!" }
         Toast.makeText(this, mensajeBienvenida, Toast.LENGTH_SHORT).show()
 
+        // Apagar modo invitado al iniciar sesión
+        getSharedPreferences("ConfigApp", Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean("modo_invitado", false)
+            .apply()
+
         val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
         prefs.edit().apply {
             putBoolean("sesion_activa", true)
@@ -119,7 +130,7 @@ class iniciar_sesion_cliente : AppCompatActivity() {
             apply()
         }
 
-        // 2. Al iniciar sesión por primera vez, también te lleva directo a MainActivity (activity_main.xml)
+        // 2. Al iniciar sesión, te lleva directo a MainActivity (activity_main.xml)
         val volverAtras = intent.getBooleanExtra("volver_atras", false)
         if (volverAtras) {
             finish()

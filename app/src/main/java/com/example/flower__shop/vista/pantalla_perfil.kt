@@ -39,6 +39,16 @@ class pantalla_perfil : AppCompatActivity() {
         navCarrito = findViewById(R.id.navCarrito)
         navPerfil = findViewById(R.id.navPerfil)
 
+        cargarEstadoSesion()
+        configurarEventos()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cargarEstadoSesion()
+    }
+
+    private fun cargarEstadoSesion() {
         val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
         val sesionActiva = prefs.getBoolean("sesion_activa", false)
         val idCliente = intent.getIntExtra("id_cliente", prefs.getInt("id_cliente", 0))
@@ -50,19 +60,9 @@ class pantalla_perfil : AppCompatActivity() {
         } else {
             mostrarModoInvitado()
         }
-
-        configurarEventos()
     }
 
     private fun configurarEventos() {
-        btnCerrarSesion.setOnClickListener {
-            getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE).edit().clear().apply()
-            getSharedPreferences("sesion_cliente", Context.MODE_PRIVATE).edit().clear().apply()
-
-            mostrarModoInvitado()
-            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
-        }
-
         navInicio.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -82,14 +82,37 @@ class pantalla_perfil : AppCompatActivity() {
         txtNombreUsuario.text = "Invitado"
         txtCorreo.text = ""
         txtTelefono.text = ""
-        btnCerrarSesion.isEnabled = false
+
+        btnCerrarSesion.isEnabled = true
+        btnCerrarSesion.text = "Iniciar Sesión"
+        btnCerrarSesion.setOnClickListener {
+            val intentLogin = Intent(this, iniciar_sesion_cliente::class.java)
+            intentLogin.putExtra("volver_atras", true)
+            startActivity(intentLogin)
+        }
     }
 
     fun mostrarPerfil(nombreCompleto: String, correo: String, telefono: String) {
         txtNombreUsuario.text = nombreCompleto
         txtCorreo.text = correo
         txtTelefono.text = telefono
+
         btnCerrarSesion.isEnabled = true
+        btnCerrarSesion.text = "Cerrar Sesión"
+        btnCerrarSesion.setOnClickListener {
+            getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE).edit().clear().apply()
+            getSharedPreferences("sesion_cliente", Context.MODE_PRIVATE).edit().clear().apply()
+
+            getSharedPreferences("ConfigApp", Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean("modo_invitado", true)
+                .apply()
+
+            intent.removeExtra("id_cliente")
+
+            mostrarModoInvitado()
+            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun mostrarError(mensaje: String) {
