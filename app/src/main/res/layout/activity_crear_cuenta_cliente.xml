@@ -305,7 +305,7 @@
                     android:id="@+id/etContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Mínimo 6 caracteres"
+                    android:hint="Mínimo 8 caracteres"
                     android:inputType="textPassword"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
