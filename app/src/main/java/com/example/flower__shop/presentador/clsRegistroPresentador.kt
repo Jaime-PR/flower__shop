@@ -45,7 +45,7 @@ class clsRegistroPresentador(
         val tieneEspecial = password.any { !it.isLetterOrDigit() && !it.isWhitespace() }
 
         if (password.length < 8 || !tieneMayuscula || !tieneMinuscula || !tieneEspecial) {
-            vista?.mostrarError("La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un carácter especial.")
+            vista?.mostrarError("La contraseña debe tener mínimo 8 caracteres, mayúsculas,minúsculas y un carácter especial.")
             return
         }
 
