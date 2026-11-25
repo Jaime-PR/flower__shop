@@ -157,7 +157,9 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="#E30B7B"
-                app:hintEnabled="false">
+                app:hintEnabled="false"
+                app:endIconMode="password_toggle"
+                app:endIconTint="#E30B7B">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etContrasena"
