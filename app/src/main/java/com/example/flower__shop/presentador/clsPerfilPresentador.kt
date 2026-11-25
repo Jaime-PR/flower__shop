@@ -25,7 +25,7 @@ class clsPerfilPresentador(
 
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val response = modelo.obtenerPerfil(idCliente)
+                val response = modelo.perfil_cliente(idCliente)
                 if (response.isSuccessful) {
                     val respuesta = response.body()
                     if (respuesta != null && respuesta.exito) {

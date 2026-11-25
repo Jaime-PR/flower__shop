@@ -5,7 +5,7 @@ import retrofit2.Response
 
 class clsPerfilModelo {
 
-    suspend fun obtenerPerfil(idCliente: Int): Response<dataPerfilResponse> {
-        return RetroFitCliente.apiService.obtenerPerfil(idCliente)
+    suspend fun perfil_cliente(idCliente: Int): Response<dataPerfilResponse> {
+        return RetroFitCliente.apiService.perfil_cliente(idCliente)
     }
 }
