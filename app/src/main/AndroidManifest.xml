@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Flower__shop"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".vista.MainActivity"
+            android:name=".vista.iniciar_sesion_cliente"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -24,6 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".vista.crear_cuenta_cliente"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".vista.MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".vista.pantalla_explorar"
             android:exported="true"
@@ -36,16 +44,12 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".vista.crear_cuenta_cliente"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".vista.iniciar_sesion_cliente"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name=".vista.pantalla_perfil"
             android:exported="false" />
+        <activity
+            android:name=".vista.pantalla_perfil_empleado"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".vista.pantalla_envio"
             android:exported="false"
