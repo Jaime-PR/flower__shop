@@ -2,26 +2,37 @@ package com.example.flower__shop.presentador
 
 import com.example.flower__shop.modelo.clsCarritoModelo
 import com.example.flower__shop.modelo.dataProductoCarrito
+import com.example.flower__shop.modelo.dataResumenCarritoResponse
 import com.example.flower__shop.vista.pantalla_carrito
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class clsCarritoPresentador(
-    private val vista: pantalla_carrito,
-    private val idCliente: Int
+    private var vista: pantalla_carrito,
+    private var idCliente: Int
 ) {
 
     private val modeloCarrito = clsCarritoModelo()
     private var listaCarrito: List<dataProductoCarrito> = emptyList()
 
-    fun iniciar() {
-        cargarCarritoYResumen()
+    fun actualizarCliente(nuevoId: Int) {
+        idCliente = nuevoId
     }
 
     fun cargarCarritoYResumen() {
         if (idCliente <= 0) {
-            vista.mostrarError("No se encontró un cliente activo")
+            listaCarrito = emptyList()
+            vista.mostrarProductosCarrito(emptyList())
+            vista.mostrarResumen(
+                dataResumenCarritoResponse(
+                    exito = true,
+                    subtotal = 0.0,
+                    envio = 0.0,
+                    total = 0.0,
+                    envioGratis = false
+                )
+            )
             return
         }
 
@@ -48,6 +59,11 @@ class clsCarritoPresentador(
     }
 
     fun eliminarProducto(producto: dataProductoCarrito) {
+        if (idCliente <= 0) {
+            vista.mostrarError("Inicia sesión para modificar el carrito")
+            return
+        }
+
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val respuesta = modeloCarrito.eliminarDelCarrito(idCliente, producto.idProducto)
