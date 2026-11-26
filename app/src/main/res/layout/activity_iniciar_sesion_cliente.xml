@@ -123,7 +123,9 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="#E30B7B"
-                app:hintEnabled="false">
+                app:hintEnabled="false"
+                app:startIconDrawable="@android:drawable/ic_dialog_email"
+                app:startIconTint="#E30B7B">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCorreo"
@@ -157,7 +159,11 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="#E30B7B"
-                app:hintEnabled="false">
+                app:endIconMode="password_toggle"
+                app:endIconTint="#E30B7B"
+                app:hintEnabled="false"
+                app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
+                app:startIconTint="#E30B7B">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etContrasena"
@@ -190,7 +196,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#F5C6DC" />
+        android:background="#F5C6DC"
+        android:visibility="visible" />
 
     <!-- Barra de navegación inferior fija -->
     <LinearLayout
@@ -201,7 +208,8 @@
         android:elevation="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingVertical="6dp">
+        android:paddingVertical="6dp"
+        android:visibility="gone">
 
         <!-- Item 1: Inicio -->
         <LinearLayout

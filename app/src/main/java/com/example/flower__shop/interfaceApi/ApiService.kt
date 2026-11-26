@@ -10,6 +10,7 @@ import com.example.flower__shop.modelo.dataLoginRequest
 import com.example.flower__shop.modelo.dataLoginResponse
 import com.example.flower__shop.modelo.dataMotivo
 import com.example.flower__shop.modelo.dataObtenerCarritoResponse
+import com.example.flower__shop.modelo.dataPerfilEmpleadoResponse
 import com.example.flower__shop.modelo.dataPerfilResponse
 import com.example.flower__shop.modelo.dataProductoItem
 import com.example.flower__shop.modelo.dataRegistroRequest
@@ -58,8 +59,11 @@ interface ApiService {
     @GET("detalle_producto.php")
     suspend fun obtenerDetalleProducto(@Query("id_producto") idProducto: Int): Response<dataDetalleProductoResponse>
 
-    @GET("obtener_perfil.php")
-    suspend fun obtenerPerfil(@Query("id_cliente") idCliente: Int): Response<dataPerfilResponse>
+    @GET("perfil_cliente.php")
+    suspend fun perfil_cliente(@Query("id") idCliente: Int): Response<dataPerfilResponse>
+
+    @GET("perfil_empleado.php")
+    suspend fun perfil_empleado(@Query("id") idEmpleado: Int): Response<dataPerfilEmpleadoResponse>
     //Carrito
     @POST("agregar_al_carrito.php")
     suspend fun agregarAlCarrito(@Body request: dataAgregarCarritoRequest): Response<dataAgregarCarritoResponse>

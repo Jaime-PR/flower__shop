@@ -7,7 +7,6 @@ import kotlinx.serialization.Serializable
 data class dataPerfilResponse(
     @SerialName("exito") val exito: Boolean = false,
     @SerialName("mensaje") val mensaje: String = "",
-    @SerialName("id_cliente") val idCliente: Int? = null,
     @SerialName("nombre") val nombre: String? = null,
     @SerialName("apellido_paterno") val apellidoPaterno: String? = null,
     @SerialName("apellido_materno") val apellidoMaterno: String? = null,
