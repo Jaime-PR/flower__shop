@@ -50,6 +50,10 @@
             android:name=".vista.pantalla_perfil_empleado"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".vista.pantalla_envio"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
