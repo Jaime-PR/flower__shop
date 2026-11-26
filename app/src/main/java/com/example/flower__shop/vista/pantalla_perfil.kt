@@ -14,12 +14,10 @@ import com.google.android.material.button.MaterialButton
 class pantalla_perfil : AppCompatActivity() {
 
     private lateinit var presentador: clsPerfilPresentador
-
     private lateinit var txtNombreUsuario: TextView
     private lateinit var txtCorreo: TextView
     private lateinit var txtTelefono: TextView
     private lateinit var btnCerrarSesion: MaterialButton
-
     private lateinit var navInicio: LinearLayout
     private lateinit var navExplorar: LinearLayout
     private lateinit var navCarrito: LinearLayout
@@ -55,7 +53,8 @@ class pantalla_perfil : AppCompatActivity() {
 
         presentador = clsPerfilPresentador(this, idCliente)
 
-        if (sesionActiva && idCliente > 0) {
+        val tipoUsuario = prefs.getString("tipo_usuario", "")
+        if (sesionActiva && tipoUsuario == "cliente" && idCliente > 0) {
             presentador.iniciar()
         } else {
             mostrarModoInvitado()
@@ -63,6 +62,20 @@ class pantalla_perfil : AppCompatActivity() {
     }
 
     private fun configurarEventos() {
+        btnCerrarSesion.setOnClickListener {
+            val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
+            val sesionActiva = prefs.getBoolean("sesion_activa", false)
+            val tipoUsuario = prefs.getString("tipo_usuario", "")
+
+            if (sesionActiva && tipoUsuario == "cliente") {
+                cerrarSesion()
+            } else {
+                val intentLogin = Intent(this, iniciar_sesion_cliente::class.java)
+                intentLogin.putExtra("volver_atras", true)
+                startActivity(intentLogin)
+            }
+        }
+
         navInicio.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -85,11 +98,21 @@ class pantalla_perfil : AppCompatActivity() {
 
         btnCerrarSesion.isEnabled = true
         btnCerrarSesion.text = "Iniciar Sesión"
-        btnCerrarSesion.setOnClickListener {
-            val intentLogin = Intent(this, iniciar_sesion_cliente::class.java)
-            intentLogin.putExtra("volver_atras", true)
-            startActivity(intentLogin)
-        }
+    }
+
+    private fun cerrarSesion() {
+        getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("sesion_cliente", Context.MODE_PRIVATE).edit().clear().apply()
+
+        getSharedPreferences("ConfigApp", Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean("modo_invitado", true)
+            .apply()
+
+        intent.removeExtra("id_cliente")
+
+        mostrarModoInvitado()
+        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
     }
 
     fun mostrarPerfil(nombreCompleto: String, correo: String, telefono: String) {
@@ -99,20 +122,6 @@ class pantalla_perfil : AppCompatActivity() {
 
         btnCerrarSesion.isEnabled = true
         btnCerrarSesion.text = "Cerrar Sesión"
-        btnCerrarSesion.setOnClickListener {
-            getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE).edit().clear().apply()
-            getSharedPreferences("sesion_cliente", Context.MODE_PRIVATE).edit().clear().apply()
-
-            getSharedPreferences("ConfigApp", Context.MODE_PRIVATE)
-                .edit()
-                .putBoolean("modo_invitado", true)
-                .apply()
-
-            intent.removeExtra("id_cliente")
-
-            mostrarModoInvitado()
-            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
-        }
     }
 
     fun mostrarError(mensaje: String) {
