@@ -5,7 +5,8 @@ import retrofit2.Response
 
 class clsPerfilEmpleadoModelo {
 
-    suspend fun perfil_empleado(idEmpleado: Int): Response<dataPerfilEmpleadoResponse> {
-        return RetroFitCliente.apiService.perfil_empleado(idEmpleado)
+    suspend fun perfil_empleado(idEmpleado: Int, correo: String): Response<dataPerfilEmpleadoResponse> {
+        val request = dataPerfilEmpleadoRequest(id = idEmpleado, correo = correo)
+        return RetroFitCliente.apiService.perfil_empleado(request)
     }
 }
