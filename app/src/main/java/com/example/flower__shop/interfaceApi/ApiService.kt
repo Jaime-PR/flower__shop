@@ -60,7 +60,7 @@ interface ApiService {
     suspend fun obtenerDetalleProducto(@Query("id_producto") idProducto: Int): Response<dataDetalleProductoResponse>
 
     @GET("perfil_cliente.php")
-    suspend fun perfil_cliente(@Query("id_cliente") idCliente: Int): Response<dataPerfilResponse>
+    suspend fun perfil_cliente(@Query("id") idCliente: Int): Response<dataPerfilResponse>
 
     @GET("perfil_empleado.php")
     suspend fun perfil_empleado(@Query("id") idEmpleado: Int): Response<dataPerfilEmpleadoResponse>
