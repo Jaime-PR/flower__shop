@@ -6,10 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class clsPerfilPresentador(
-    private val vista: pantalla_perfil,
-    private val idCliente: Int = 1
-) {
+class clsPerfilPresentador(private val vista: pantalla_perfil, private val idCliente: Int = 0) {
 
     private val modelo = clsPerfilModelo()
 
