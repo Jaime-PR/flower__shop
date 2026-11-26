@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class clsExplorarPresentador(private val vista: pantalla_explorar, private val idCliente: Int = 1) {
+class clsExplorarPresentador(private val vista: pantalla_explorar, private val idCliente: Int = 0) {
 
     private val modeloExplorar = clsExplorarModelo()
     private val modeloCarrito = clsCarritoModelo()

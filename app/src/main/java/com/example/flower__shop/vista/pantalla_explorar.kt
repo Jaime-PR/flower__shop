@@ -41,9 +41,13 @@ class pantalla_explorar : AppCompatActivity() {
     private lateinit var motivoAdapter: MotivoAdapter
     private lateinit var productoAdapter: ProductoCatalogoAdapter
 
+    private var idClienteActual: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_explorar)
+
+        idClienteActual = obtenerIdCliente()
 
         etBuscar = findViewById(R.id.etBuscar)
         tvFiltros = findViewById(R.id.tvFiltros)
@@ -56,12 +60,35 @@ class pantalla_explorar : AppCompatActivity() {
         navCarrito = findViewById(R.id.navCarrito)
         navPerfil = findViewById(R.id.navPerfil)
 
-        presentador = clsExplorarPresentador(this)
+        presentador = clsExplorarPresentador(this, idClienteActual)
 
         configurarRecyclerViews()
         configurarEventos()
 
         presentador.iniciar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val nuevoId = obtenerIdCliente()
+        if (nuevoId != idClienteActual) {
+            idClienteActual = nuevoId
+            presentador = clsExplorarPresentador(this, idClienteActual)
+            presentador.iniciar()
+        }
+    }
+
+    private fun obtenerIdCliente(): Int {
+        val prefs = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+        val sesionActiva = prefs.getBoolean("sesion_activa", false)
+        val tipoUsuario = prefs.getString("tipo_usuario", "")
+
+        if (sesionActiva && tipoUsuario == "cliente") {
+            val idPrefs = prefs.getInt("id_cliente", 0)
+            if (idPrefs > 0) return idPrefs
+        }
+
+        return 0
     }
 
     private fun configurarRecyclerViews() {
@@ -120,7 +147,7 @@ class pantalla_explorar : AppCompatActivity() {
         }
 
         navPerfil.setOnClickListener {
-            // Navegar a Perfil cuando se conecte esa Activity
+            startActivity(Intent(this, pantalla_perfil::class.java))
         }
     }
 
@@ -167,6 +194,7 @@ class pantalla_explorar : AppCompatActivity() {
     fun mostrarMensaje(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
+
     fun abrirDetalleProducto(idProducto: Int, idCliente: Int) {
         val intent = Intent(this, pantalla_detalle_producto::class.java)
         intent.putExtra("id_producto", idProducto)

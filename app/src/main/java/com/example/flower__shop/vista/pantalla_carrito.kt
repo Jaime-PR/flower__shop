@@ -34,7 +34,7 @@ class pantalla_carrito : AppCompatActivity() {
 
     private lateinit var carritoAdapter: CarritoAdapter
 
-    private var idClienteActual: Int = 1
+    private var idClienteActual: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,26 +57,31 @@ class pantalla_carrito : AppCompatActivity() {
 
         configurarRecyclerView()
         configurarEventos()
-
-        presentador.iniciar()
     }
 
     override fun onResume() {
         super.onResume()
+        idClienteActual = obtenerIdCliente()
         if (::presentador.isInitialized) {
+            presentador.actualizarCliente(idClienteActual)
             presentador.cargarCarritoYResumen()
         }
     }
 
     private fun obtenerIdCliente(): Int {
-        val prefs = getSharedPreferences("flower_shop_prefs", MODE_PRIVATE)
-        val idPrefs = prefs.getInt("id_cliente", -1)
-        if (idPrefs > 0) return idPrefs
+        val prefs = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+        val sesionActiva = prefs.getBoolean("sesion_activa", false)
+        val tipoUsuario = prefs.getString("tipo_usuario", "")
 
-        val idIntent = intent.getIntExtra("id_cliente", -1)
+        if (sesionActiva && tipoUsuario == "cliente") {
+            val idPrefs = prefs.getInt("id_cliente", 0)
+            if (idPrefs > 0) return idPrefs
+        }
+
+        val idIntent = intent.getIntExtra("id_cliente", 0)
         if (idIntent > 0) return idIntent
 
-        return 1
+        return 0
     }
 
     private fun configurarRecyclerView() {
