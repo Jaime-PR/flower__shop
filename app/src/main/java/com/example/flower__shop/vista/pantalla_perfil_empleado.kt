@@ -35,9 +35,10 @@ class pantalla_perfil_empleado : AppCompatActivity() {
         navPerfil = findViewById(R.id.navPerfil)
 
         val prefs = getSharedPreferences("sesion_usuario", MODE_PRIVATE)
-        val idEmpleado = intent.getIntExtra("id_empleado", prefs.getInt("id_empleado", 1))
+        val idEmpleado = intent.getIntExtra("id_empleado", prefs.getInt("id_empleado", 0))
+        val correoEmpleado = intent.getStringExtra("correo") ?: prefs.getString("correo", "") ?: ""
 
-        presentador = clsPerfilEmpleadoPresentador(this, idEmpleado)
+        presentador = clsPerfilEmpleadoPresentador(this, idEmpleado, correoEmpleado)
         presentador.iniciar()
 
         configurarEventos()
@@ -52,7 +53,7 @@ class pantalla_perfil_empleado : AppCompatActivity() {
         }
 
         navPedidos.setOnClickListener {
-            //pantalla_pedidos
+            //pantalla envio
         }
     }
 

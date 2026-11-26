@@ -50,11 +50,12 @@ class pantalla_perfil : AppCompatActivity() {
         val prefs = getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE)
         val sesionActiva = prefs.getBoolean("sesion_activa", false)
         val idCliente = intent.getIntExtra("id_cliente", prefs.getInt("id_cliente", 0))
+        val correoCliente = intent.getStringExtra("correo") ?: prefs.getString("correo", "") ?: ""
 
-        presentador = clsPerfilPresentador(this, idCliente)
+        presentador = clsPerfilPresentador(this, idCliente, correoCliente)
 
         val tipoUsuario = prefs.getString("tipo_usuario", "")
-        if (sesionActiva && tipoUsuario == "cliente" && idCliente > 0) {
+        if (sesionActiva && tipoUsuario == "cliente" && idCliente > 0 && correoCliente.isNotBlank()) {
             presentador.iniciar()
         } else {
             mostrarModoInvitado()
@@ -104,12 +105,12 @@ class pantalla_perfil : AppCompatActivity() {
         getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE).edit().clear().apply()
         getSharedPreferences("sesion_cliente", Context.MODE_PRIVATE).edit().clear().apply()
 
-        getSharedPreferences("ConfigApp", Context.MODE_PRIVATE)
-            .edit()
-            .putBoolean("modo_invitado", true)
+        getSharedPreferences("ConfigApp", Context.MODE_PRIVATE).edit()
+              .putBoolean("modo_invitado", true)
             .apply()
 
         intent.removeExtra("id_cliente")
+        intent.removeExtra("correo")
 
         mostrarModoInvitado()
         Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
