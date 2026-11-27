@@ -86,4 +86,26 @@ class clsCarritoModelo {
             )
         }
     }
+
+    suspend fun vaciarCarrito(idCliente: Int): dataAccionCarritoResponse {
+        val resp = api.vaciarCarrito(
+            dataVaciarCarritoRequest(
+                idCliente = idCliente
+            )
+        )
+        val body = resp.body()
+        return if (resp.isSuccessful && body != null) {
+            dataAccionCarritoResponse(
+                exito = body.exito,
+                mensaje = body.mensaje,
+                totalArticulos = body.totalArticulos,
+                subtotal = body.subtotal
+            )
+        } else {
+            dataAccionCarritoResponse(
+                exito = false,
+                mensaje = body?.mensaje ?: "Error HTTP ${resp.code()}"
+            )
+        }
+    }
 }
