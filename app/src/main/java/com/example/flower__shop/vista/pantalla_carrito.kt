@@ -105,6 +105,19 @@ class pantalla_carrito : AppCompatActivity() {
 
     private fun configurarEventos() {
 
+        btnFinalizarCompra.setOnClickListener {
+            if (idClienteActual <= 0) {
+                Toast.makeText(this, "Por favor inicia sesión para continuar con la compra.", Toast.LENGTH_SHORT).show()
+                val intentLogin = Intent(this, iniciar_sesion_cliente::class.java)
+                intentLogin.putExtra("volver_atras", true)
+                startActivity(intentLogin)
+            } else {
+                val intentEnvio = Intent(this, pantalla_envio::class.java)
+                intentEnvio.putExtra("id_cliente", idClienteActual)
+                startActivity(intentEnvio)
+            }
+        }
+
         navInicio.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(

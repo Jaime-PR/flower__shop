@@ -332,11 +332,21 @@
                         android:textSize="11sp"
                         android:textStyle="bold" />
 
-                    <Spinner
-                        android:id="@+id/spFechaEntrega"
+                    <EditText
+                        android:id="@+id/etFechaEntrega"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="48dp" />
+                        android:background="@null"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:gravity="center_vertical"
+                        android:hint="AAAA-MM-DD"
+                        android:inputType="none"
+                        android:minHeight="48dp"
+                        android:textColor="#3B2D32"
+                        android:textColorHint="#9E8C92"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!-- Franja horaria -->
@@ -354,16 +364,26 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Franja horaria"
+                        android:text="Hora de entrega"
                         android:textColor="#8A767D"
                         android:textSize="11sp"
                         android:textStyle="bold" />
 
-                    <Spinner
-                        android:id="@+id/spFranjaHoraria"
+                    <EditText
+                        android:id="@+id/etFranjaHoraria"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="48dp" />
+                        android:background="@null"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:gravity="center_vertical"
+                        android:hint="HH:mm"
+                        android:inputType="none"
+                        android:minHeight="48dp"
+                        android:textColor="#3B2D32"
+                        android:textColorHint="#9E8C92"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 

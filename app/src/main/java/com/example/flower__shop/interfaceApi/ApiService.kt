@@ -61,7 +61,6 @@ interface ApiService {
     @GET("detalle_producto.php")
     suspend fun obtenerDetalleProducto(@Query("id_producto") idProducto: Int): Response<dataDetalleProductoResponse>
 
-
     @POST("perfil_cliente.php")
     suspend fun perfil_cliente(@Body request: dataPerfilRequest): Response<dataPerfilResponse>
 
@@ -82,4 +81,8 @@ interface ApiService {
 
     @POST("vaciar_carrito.php")
     suspend fun vaciarCarrito(@Body request: dataVaciarCarritoRequest): Response<dataAccionCarritoResponse>
+
+    //Envio
+    @POST("registrar_envio.php")
+    suspend fun registrarEnvio(@Body request: com.example.flower__shop.modelo.dataEnvioRequest): Response<com.example.flower__shop.modelo.dataEnvioResponse>
 }
