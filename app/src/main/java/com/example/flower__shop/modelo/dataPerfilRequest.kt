@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class dataPerfilRequest(
-    @SerialName("id_cliente") val idCliente: Int? = null,
-    @SerialName("correo") val correo: String? = null
+    @SerialName("id") val id: Int,
+    @SerialName("correo") val correo: String
 )

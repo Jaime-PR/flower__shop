@@ -8,7 +8,8 @@ import kotlinx.coroutines.launch
 
 class clsPerfilPresentador(
     private val vista: pantalla_perfil,
-    private val idCliente: Int = 1
+    private val idCliente: Int = 0,
+    private val correo: String = ""
 ) {
 
     private val modelo = clsPerfilModelo()
@@ -18,14 +19,14 @@ class clsPerfilPresentador(
     }
 
     fun cargarPerfil() {
-        if (idCliente <= 0) {
+        if (idCliente <= 0 || correo.isBlank()) {
             vista.mostrarError("No se encontró un cliente activo")
             return
         }
 
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val response = modelo.obtenerPerfil(idCliente)
+                val response = modelo.perfil_cliente(idCliente, correo)
                 if (response.isSuccessful) {
                     val respuesta = response.body()
                     if (respuesta != null && respuesta.exito) {

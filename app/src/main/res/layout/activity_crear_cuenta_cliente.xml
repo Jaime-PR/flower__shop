@@ -299,13 +299,15 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="#E30B7B"
-                app:hintEnabled="false">
+                app:hintEnabled="false"
+                app:endIconMode="password_toggle"
+                app:endIconTint="#E30B7B">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Mínimo 6 caracteres"
+                    android:hint="Contraseña"
                     android:inputType="textPassword"
                     android:textColorHint="#B59AA6"
                     android:textSize="14sp" />
@@ -333,7 +335,9 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="#E30B7B"
-                app:hintEnabled="false">
+                app:hintEnabled="false"
+                app:endIconMode="password_toggle"
+                app:endIconTint="#E30B7B">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etConfirmarContrasena"
